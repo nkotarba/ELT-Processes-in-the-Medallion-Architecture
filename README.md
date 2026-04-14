@@ -129,3 +129,12 @@ Purpose:
 * provide datasets optimized for analytics
 * support dashboards and reporting
 * enable business insights
+
+## Data Orchestration
+
+Data pipeline orchestration is implemented using Apache Airflow, which manages the execution, scheduling, and monitoring of the entire ELT process.
+
+###  Orchestration Design
+
+The project follows a **single-entry orchestration pattern**, where Airflow triggers a single Spark pipeline script responsible for executing all transformation layers:
+
