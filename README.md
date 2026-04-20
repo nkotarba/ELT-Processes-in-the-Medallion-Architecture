@@ -136,5 +136,34 @@ Data pipeline orchestration is implemented using Apache Airflow, which manages t
 
 ###  Orchestration Design
 
-The project follows a **single-entry orchestration pattern**, where Airflow triggers a single Spark pipeline script responsible for executing all transformation layers:
+The project follows a **single-entry orchestration pattern**, where Airflow triggers a single Spark pipeline script responsible for executing all transformation layers.
+
+### What was added:
+- Kafka producer for sending raw data as events
+- Kafka consumer for ingesting data into Snowflake Bronze layer
+- Topic-based data streaming (`raw-data`)
+
+### Why:
+- Decouples data ingestion from processing
+- Enables real-time / near real-time data flow
+- Improves scalability and fault tolerance
+- Allows replaying data (event sourcing capability)
+
+## Event-Driven Orchestration (Airflow)
+
+The pipeline is now orchestrated using **Apache Airflow** with trigger-based execution.
+
+### What was added:
+- Airflow DAG for Bronze → Silver transformation
+- PythonOperator to execute transformation logic
+- Trigger-based execution (`schedule_interval=None`)
+
+### Why:
+- Enables automation of data processing
+- Supports event-driven pipelines instead of manual execution
+- Improves pipeline maintainability and observability
+
+## Diagram 
+<img width="1024" height="1536" alt="ChatGPT Image Apr 20, 2026, 12_52_08 PM" src="https://github.com/user-attachments/assets/bc25f448-9282-43ea-999a-9d8bfb65d815" />
+
 
